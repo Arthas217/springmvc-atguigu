@@ -9,5 +9,9 @@
    <a href="/springmvc/hello"> -----固定连接转发到target页面-----</a>
    <br>
    <a th:href="@{/hello}">HelloWorld</a><br/>
+
+   <form th:action="@{/form}" method="post">POST 表单提交
+       <input type="submit" value="提交">
+   </form>
 </body>
 </html>

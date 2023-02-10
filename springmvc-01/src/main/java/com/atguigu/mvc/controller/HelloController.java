@@ -2,6 +2,7 @@ package com.atguigu.mvc.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
  * @Author 会游泳的蚂蚁
@@ -29,6 +30,16 @@ public class HelloController {
      */
     @RequestMapping("/hello")
     public String HelloWorld() {
+        return "target";
+    }
+
+
+    /**
+     * post 表单提交
+     * @return
+     */
+    @RequestMapping(value = "/form" ,method = RequestMethod.POST)
+    public String form() {
         return "target";
     }
 }
