@@ -13,13 +13,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class HelloController {
 
+    /**
+     * 对首页的访问
+     * @return
+     */
     @RequestMapping("/")
     public String index() {
         //设置视图名称
         return "index";
     }
 
-    @RequestMapping("/hello")
+    /**
+     * 超链接跳转到指定页面
+     * @return
+     */
+    @RequestMapping("/target")
     public String HelloWorld() {
         return "target";
     }
