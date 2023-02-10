@@ -27,7 +27,7 @@ public class HelloController {
      * 超链接跳转到指定页面
      * @return
      */
-    @RequestMapping("/target")
+    @RequestMapping("/hello")
     public String HelloWorld() {
         return "target";
     }
