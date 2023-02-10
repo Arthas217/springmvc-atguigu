@@ -35,7 +35,7 @@ public class HelloController {
 
 
     /**
-     * post 表单提交
+     * post表单提交
      * @return
      */
     @RequestMapping(value = "/form" ,method = RequestMethod.POST)
@@ -45,11 +45,21 @@ public class HelloController {
 
 
     /**
-     * params注解使用
+     * params使用
      * @return
      */
     @RequestMapping(value = "/params" , params = {"username","password=123"})
     public String params() {
+        return "target";
+    }
+
+
+    /**
+     * headers使用
+     * @return
+     */
+    @RequestMapping(value = "/params2" , params = {"username","password=123"} ,headers = "Host=localhost:8080")
+    public String params2() {
         return "target";
     }
 }
