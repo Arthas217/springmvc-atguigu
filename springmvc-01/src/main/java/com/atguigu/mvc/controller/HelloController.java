@@ -62,4 +62,16 @@ public class HelloController {
     public String params2() {
         return "target";
     }
+
+
+    /**
+     * ant风格
+     * @return
+     */
+//    @RequestMapping(value = "/ant/a?a")
+//    @RequestMapping(value = "/ant/a*a")
+    @RequestMapping(value = "/ant/**")
+    public String ant() {
+        return "target";
+    }
 }
