@@ -42,4 +42,14 @@ public class HelloController {
     public String form() {
         return "target";
     }
+
+
+    /**
+     * params注解使用
+     * @return
+     */
+    @RequestMapping(value = "/params" , params = {"username","password=123"})
+    public String params() {
+        return "target";
+    }
 }
