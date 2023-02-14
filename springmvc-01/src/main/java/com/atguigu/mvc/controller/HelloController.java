@@ -1,12 +1,13 @@
 package com.atguigu.mvc.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
  * @Author 会游泳的蚂蚁
- * @Description:  注入控制器组件到ioc容器
+ * @Description: 注入控制器组件到ioc容器
  * 1、注解@Controller+扫描方式component-scan
  * 2、bean标签---xml方式
  * @Date 2023/2/10 13:05
@@ -16,6 +17,7 @@ public class HelloController {
 
     /**
      * 对首页的访问
+     *
      * @return
      */
     @RequestMapping("/")
@@ -26,6 +28,7 @@ public class HelloController {
 
     /**
      * 超链接跳转到指定页面
+     *
      * @return
      */
     @RequestMapping("/hello")
@@ -36,9 +39,10 @@ public class HelloController {
 
     /**
      * post表单提交
+     *
      * @return
      */
-    @RequestMapping(value = "/form" ,method = RequestMethod.POST)
+    @RequestMapping(value = "/form", method = RequestMethod.POST)
     public String form() {
         return "target";
     }
@@ -46,9 +50,10 @@ public class HelloController {
 
     /**
      * params使用
+     *
      * @return
      */
-    @RequestMapping(value = "/params" , params = {"username","password=123"})
+    @RequestMapping(value = "/params", params = {"username", "password=123"})
     public String params() {
         return "target";
     }
@@ -56,9 +61,10 @@ public class HelloController {
 
     /**
      * headers使用
+     *
      * @return
      */
-    @RequestMapping(value = "/params2" , params = {"username","password=123"} ,headers = "Host=localhost:8080")
+    @RequestMapping(value = "/params2", params = {"username", "password=123"}, headers = "Host=localhost:8080")
     public String params2() {
         return "target";
     }
@@ -66,12 +72,20 @@ public class HelloController {
 
     /**
      * ant风格
+     *
      * @return
      */
 //    @RequestMapping(value = "/ant/a?a")
 //    @RequestMapping(value = "/ant/a*a")
     @RequestMapping(value = "/ant/**")
     public String ant() {
+        return "target";
+    }
+
+
+    @RequestMapping(value = "/testPath/{id}")
+    public String testPath(@PathVariable("id") Integer id) {
+        System.out.println(id);
         return "target";
     }
 }
