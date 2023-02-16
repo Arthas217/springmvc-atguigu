@@ -122,4 +122,20 @@ public class HelloController {
         System.out.println(user);
         return "target";
     }
+
+
+    //域对象共享 4种 request、session（浏览器开-关）、application（servletcontext 服务器开-关）、page（jsp页面）
+
+    /**
+     * 使用ServletAPI向request域对象 共享数据
+     * @param httpServletRequest
+     * @return
+     */
+    @RequestMapping(value = "/testHttpServletAPI")
+    public String testHttpServletAPI(HttpServletRequest  httpServletRequest){
+        httpServletRequest.setAttribute("testScope","hello servletAPI");
+        //共享的数据转发到target.html页面
+        return "target";
+    }
+
 }
