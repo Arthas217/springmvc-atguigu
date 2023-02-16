@@ -1,9 +1,12 @@
 package com.atguigu.mvc.controller;
 
+import com.atguigu.mvc.model.User;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 /**
  * @Author 会游泳的蚂蚁
@@ -86,6 +89,37 @@ public class HelloController {
     @RequestMapping(value = "/testPath/{id}")
     public String testPath(@PathVariable("id") Integer id) {
         System.out.println(id);
+        return "target";
+    }
+
+    @RequestMapping(value = "/requestHeader")
+    public String testPath(@RequestHeader("Host") String host) {
+        System.out.println(host);
+        return "target";
+    }
+
+    @RequestMapping(value = "/testHttpServletRequest")
+    public String testHttpServletRequest(HttpServletRequest  httpServletRequest,
+                                         @CookieValue(value = "JSESSIONID") String JSESSIONID){
+        //浏览器第一次访问时，JSESSIONID为null、6FED810F452BE372B1C7339D1344EF31
+        //浏览器第二次访问时  JSESSIONID为6FED810F452BE372B1C7339D1344EF31、6FED810F452BE372B1C7339D1344EF31
+        System.out.println(JSESSIONID);
+        HttpSession session = httpServletRequest.getSession();
+        System.out.println(session.getId());
+        return "target";
+    }
+
+
+    /**
+     * 请求参数为POJO
+     * 表单请求get乱码问题 tomcat配置文件中，添加URIEncoding= "UTF-8"
+     * 表单请求post乱码问题 要比DispatcherServlet执行时间更早的组件（监听-执行一次、过滤），来处理设置编码
+     * @param user
+     * @return
+     */
+    @RequestMapping(value = "/testPOJO")
+    public String testPath(User user) {
+        System.out.println(user);
         return "target";
     }
 }

@@ -4,7 +4,27 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
 
-    <!-- servert(DispatcherServlet)/filter/监听器   注册-->
+    <!-- 注册  监听器/过滤器/servert(DispatcherServlet) -->
+
+    <!-- 过滤器执行在DispatcherServlet之前，且保证每次请求都过滤进行设置编码  监听器只执行一次-->
+    <filter>
+        <filter-name>CharacterEncodingFilter</filter-name>
+        <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+        <!-- 对原始请求的数据编码进行设置-->
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>UTF-8</param-value>
+        </init-param>
+        <!-- 对请求相应数据编码进行设置-->
+        <init-param>
+            <param-name>forceResponseEncoding</param-name>
+            <param-value>true</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>CharacterEncodingFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
 
     <!-- 配置SpringMVC的前端控制器，对浏览器发送的请求统一进行处理 -->
     <servlet>
