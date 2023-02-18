@@ -16,10 +16,10 @@ public class IndexController {
      *
      * @return
      */
-//    @RequestMapping("/")
-//    public String index() {
-//        //设置视图名称
-//        return "index";
-//    }
+    @RequestMapping("/")
+    public String index() {
+        //设置视图名称
+        return "index";
+    }
 
 }
