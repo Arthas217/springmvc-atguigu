@@ -2,11 +2,15 @@ package com.atguigu.mvc.controller;
 
 import com.atguigu.mvc.model.User;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.Map;
 
 /**
  * @Author 会游泳的蚂蚁
@@ -126,6 +130,7 @@ public class HelloController {
 
     //域对象共享 4种 request、session（浏览器开-关）、application（servletcontext 服务器开-关）、page（jsp页面）
 
+    //以下五个方法都是向request域对象 共享数据,org.springframework.validation.support.BindingAwareModelMap
     /**
      * 使用ServletAPI向request域对象 共享数据
      * @param httpServletRequest
@@ -137,5 +142,71 @@ public class HelloController {
         //共享的数据转发到target.html页面
         return "target";
     }
+
+    /**
+     * 使用ModelAndView向request域对象 共享数据
+     * @return
+     */
+    @RequestMapping(value = "/testModelAndView")
+    public ModelAndView testModelAndView(){
+        ModelAndView mv = new ModelAndView();
+        //向请求域request共享数据
+        mv.addObject("testScope","hello ModelAndView");
+        //设置视图，实现页面跳转
+        mv.setViewName("target");
+        return mv;
+    }
+
+
+    /**
+     * 使用Model向request域对象 共享数据
+     * @return
+     */
+    @RequestMapping(value = "/testModel")
+    public String testModel(Model model){
+        model.addAttribute("testScope","hello model");
+        System.out.println(model);
+        System.out.println(model.getClass().getName());
+        return "target";
+    }
+
+
+    /**
+     * 使用Map向request域对象 共享数据
+     * @return
+     */
+    @RequestMapping(value = "/testMap")
+    public String testMap(Map<String,Object> map){
+        map.put("testScope","hello map");
+        System.out.println(map);
+        System.out.println(map.getClass().getName());
+        return "target";
+    }
+
+    /**
+     * 使用ModalMap向request域对象 共享数据
+     * @return
+     */
+    @RequestMapping(value = "/testModalMap")
+    public String testModalMap(ModelMap modelMap){
+       modelMap.addAttribute("testScope","hello modelMap");
+        System.out.println(modelMap);
+        System.out.println(modelMap.getClass().getName());
+        return "target";
+    }
+
+
+
+    /**
+     * session向request域对象 共享数据
+     * @return
+     */
+    @RequestMapping(value = "/testSession")
+    public String testSession(HttpSession httpSession){
+        httpSession.setAttribute("testScope","hello httpSession");
+        return "target";
+    }
+
+
 
 }
