@@ -28,17 +28,6 @@ import java.util.Map;
 public class HelloController {
 
     /**
-     * 对首页的访问
-     *
-     * @return
-     */
-    @RequestMapping("/")
-    public String index() {
-        //设置视图名称
-        return "index";
-    }
-
-    /**
      * 超链接跳转到指定页面
      *
      * @return

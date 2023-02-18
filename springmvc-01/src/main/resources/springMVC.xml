@@ -29,12 +29,9 @@
         </property>
     </bean>
 
-    <!--
-       处理静态资源，例如html、js、css、jpg
-      若只设置该标签，则只能访问静态资源，其他请求则无法访问
-      此时必须设置<mvc:annotation-driven/>解决问题
-     -->
-    <mvc:default-servlet-handler/>
+    <!--视图控制器view-control仅仅实现页面跳转  等同于http://localhost:8080/springmvc_01_war/-->
+<!--当设置任何一个view-control时，control中的请求映射全部失效  + 必须加 <mvc:annotation-driven/>   -->
+    <mvc:view-controller path="/" view-name="index"></mvc:view-controller>
 
 
     <!-- 开启mvc注解驱动 -->
@@ -52,5 +49,13 @@
             </bean>
         </mvc:message-converters>
     </mvc:annotation-driven>
+
+    <!--
+       处理静态资源，例如html、js、css、jpg
+      若只设置该标签，则只能访问静态资源，其他请求则无法访问
+      此时必须设置<mvc:annotation-driven/>解决问题
+     -->
+<!--    <mvc:default-servlet-handler/>-->
+
 
 </beans>
