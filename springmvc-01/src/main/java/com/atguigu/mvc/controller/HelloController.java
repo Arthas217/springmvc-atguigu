@@ -7,6 +7,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -198,7 +199,7 @@ public class HelloController {
 
 
     /**
-     * session向request域对象 共享数据
+     * session域对象 共享数据
      * @return
      */
     @RequestMapping(value = "/testSession")
@@ -207,6 +208,16 @@ public class HelloController {
         return "target";
     }
 
+    /**
+     * application域对象 共享数据
+     * @return
+     */
+    @RequestMapping(value = "/testApplication")
+    public String testApplication(HttpSession httpSession){
+        ServletContext application = httpSession.getServletContext();
+        application.setAttribute("testScope","hello application");
+        return "target";
+    }
 
 
 }
