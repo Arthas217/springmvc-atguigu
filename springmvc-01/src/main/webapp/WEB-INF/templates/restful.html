@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>RESTFUL风格页面</title>
+</head>
+<body>
+<!--GET请求-->
+<a th:href="@{/user}">查询所有用户</a><br>
+<a th:href="@{/user/1}">根据id查询用户</a><br>
+
+<!--表单、阿贾克斯 POST请求-->
+<form th:action="@{/user}" method="post">
+    用户 <input type="text" name="username"><br>
+    密码 <input type="password" name="password">
+    <input type="submit" value="添加">
+</form>
+<br>
+
+</body>
+</html>

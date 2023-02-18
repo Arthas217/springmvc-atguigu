@@ -32,6 +32,7 @@
     <!--视图控制器view-control仅仅实现页面跳转  等同于http://localhost:8080/springmvc_01_war/-->
 <!--当设置任何一个view-control时，control中的请求映射全部失效  + 必须加 <mvc:annotation-driven/>   -->
     <mvc:view-controller path="/" view-name="index"></mvc:view-controller>
+    <mvc:view-controller path="/restfulTest" view-name="restful"></mvc:view-controller>
 
 
     <!-- 开启mvc注解驱动 -->
