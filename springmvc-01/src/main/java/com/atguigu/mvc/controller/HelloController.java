@@ -6,6 +6,10 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.InternalResourceView;
+import org.springframework.web.servlet.view.JstlView;
+import org.springframework.web.servlet.view.RedirectView;
+import org.thymeleaf.spring5.view.ThymeleafView;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.Cookie;
