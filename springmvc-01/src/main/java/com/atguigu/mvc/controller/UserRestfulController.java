@@ -32,4 +32,11 @@ public class UserRestfulController {
         System.out.println("添加用户信息-----------" + user);
         return "target";
     }
+
+
+    @RequestMapping(value = "/user", method = RequestMethod.PUT)
+    public String modifyUser(User user) {
+        System.out.println("修改用户信息-----------" + user);
+        return "target";
+    }
 }

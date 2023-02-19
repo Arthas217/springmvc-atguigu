@@ -9,11 +9,19 @@
 <a th:href="@{/user}">查询所有用户</a><br>
 <a th:href="@{/user/1}">根据id查询用户</a><br>
 
-<!--表单、阿贾克斯 POST请求-->
+<!--表单、添加 -->
 <form th:action="@{/user}" method="post">
     用户 <input type="text" name="username"><br>
     密码 <input type="password" name="password">
     <input type="submit" value="添加">
+</form>
+
+<!--表单、ajax 如果method赋值为put、delete是没有用的，需要POST请求+过滤器+隐藏的_method  -->
+<form th:action="@{/user}" method="post">
+    <input type="hidden" name="_method" value="put">
+    用户 <input type="text" name="username"><br>
+    密码 <input type="password" name="password">
+    <input type="submit" value="修改">
 </form>
 <br>
 </body>
