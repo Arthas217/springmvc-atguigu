@@ -7,11 +7,32 @@ package com.atguigu.mvc.model;
  */
 public class User {
 
+    private Integer id;
     private String username;
     private String password;
     private String sex;
     private String age;
     private String email;
+
+    public User() {
+    }
+
+    public User(Integer id,String username, String password, String sex,String age, String email) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.sex = sex;
+        this.age = age;
+        this.email = email;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public String getUsername() {
         return username;

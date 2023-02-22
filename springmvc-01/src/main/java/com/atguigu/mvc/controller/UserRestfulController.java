@@ -1,10 +1,17 @@
 package com.atguigu.mvc.controller;
 
+import com.atguigu.mvc.dao.UserDao;
 import com.atguigu.mvc.model.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
+
+import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @Author 会游泳的蚂蚁
@@ -14,6 +21,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
  */
 @Controller
 public class UserRestfulController {
+
+
 
     @RequestMapping(value = "/user", method = RequestMethod.GET)
     public String queryAllUser() {
@@ -38,5 +47,21 @@ public class UserRestfulController {
     public String modifyUser(User user) {
         System.out.println("修改用户信息-----------" + user);
         return "target";
+    }
+
+
+
+
+    @Autowired
+    private UserDao userDao;
+
+    @RequestMapping(value = "/user2", method = RequestMethod.GET)
+    public ModelAndView queryAllUser2() {
+        ModelAndView modelAndView = new ModelAndView();
+        Collection<User> allUser = userDao.getAll();
+//        List<User> allUser = userDao.getAll().stream().collect(Collectors.toList());
+        modelAndView.addObject("allUser",allUser);
+        modelAndView.setViewName("userlist");
+        return modelAndView;
     }
 }
