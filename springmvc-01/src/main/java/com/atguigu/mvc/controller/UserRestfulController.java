@@ -64,4 +64,11 @@ public class UserRestfulController {
         modelAndView.setViewName("userlist");
         return modelAndView;
     }
+
+
+    @RequestMapping(value = "/user3/{id}", method = RequestMethod.DELETE)
+    public String deleteByUserId(@PathVariable("id") Integer id) {
+        userDao.delete(id);
+        return "redirect:/user2";
+    }
 }

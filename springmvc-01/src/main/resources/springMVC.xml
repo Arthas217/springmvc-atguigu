@@ -57,7 +57,8 @@
       若只设置该标签，则只能访问静态资源，其他请求则无法访问
       此时必须设置<mvc:annotation-driven/>解决问题
      -->
-<!--    <mvc:default-servlet-handler/>-->
+<!--    开放对静态资源的访问-->
+    <mvc:default-servlet-handler/>
 
 
 </beans>
