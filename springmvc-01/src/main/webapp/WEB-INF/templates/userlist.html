@@ -27,6 +27,7 @@
     <td th:text="${user.age}"></td>
     <td th:text="${user.email}"></td>
     <td>
+      <a th:href="@{/restfulAdd}">添加</a>
       <a href="">更新</a>
       <!--超链接来控制表单的提交且是delete-->
 <!--      <a th:href="@{/user3/}+${user.id}">删除</a>-->

@@ -71,4 +71,11 @@ public class UserRestfulController {
         userDao.delete(id);
         return "redirect:/user2";
     }
+
+
+    @RequestMapping(value = "/adduser2" ,method = RequestMethod.POST)
+    public String addUser2(User user){
+        userDao.save(user);
+        return "redirect:/user2";
+    }
 }

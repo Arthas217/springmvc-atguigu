@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>添加</title>
+</head>
+<body>
+    <form th:action="@{/adduser2}" method="post">
+      名称：<input type="text" name="username"/><br>
+      密码：<input type="password" name="password"/><br>
+      年龄：<input type="text" name="age"/><br>
+      邮件：<input type="text" name="email"/><br>
+      性别：<input type="radio" name="sex" value="1">男</input>
+           <input type="radio" name="sex" value="0">女</input>
+        <br>
+        <input type="submit" value="add">提交</input>
+    </form>
+</body>
+</html>
