@@ -40,7 +40,7 @@
 
 
 
-    <!-- 开启mvc注解驱动 -->
+    <!-- 开启mvc注解驱动 请求通过DispatcherServlet处理 不加的话只能处理默认的servlet-->
     <mvc:annotation-driven>
         <mvc:message-converters>
             <!-- 处理响应中文内容乱码 -->
@@ -56,12 +56,10 @@
         </mvc:message-converters>
     </mvc:annotation-driven>
 
-    <!--
-       处理静态资源，例如html、js、css、jpg
-      若只设置该标签，则只能访问静态资源，其他请求则无法访问
-      此时必须设置<mvc:annotation-driven/>解决问题
-     -->
-<!--    开放对静态资源的访问-->
+    <!-- 处理静态资源，例如html、js、css、jpg 若只设置该标签，则只能访问静态资源，其他请求则无法访问
+      此时必须设置<mvc:annotation-driven/>解决问题 -->
+
+    <!--开放对静态资源的访问  请求通过DefaultServletHttpRequestHandler处理 不加的话静态资源找不到-->
     <mvc:default-servlet-handler/>
 
 
