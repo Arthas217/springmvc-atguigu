@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>更新</title>
+</head>
+<body>
+    <form th:action="@{/user5}" method="post">
+        <input type="hidden" name="_method" value="put">
+        <input type="hidden" name="id" th:value="${userKey.id}">
+      名称：<input type="text" name="username" th:value="${userKey.username}"/><br>
+      密码：<input type="password" name="password" th:value="${userKey.password}"/><br>
+      年龄：<input type="text" name="age" th:value="${userKey.age}"/><br>
+      邮件：<input type="text" name="email" th:value="${userKey.email}"/><br>
+      性别：<input type="radio" name="sex" value="男" th:field="${userKey.sex}">男</input>
+           <input type="radio" name="sex" value="女" th:field="${userKey.sex}">女</input>
+           <br>
+        <input type="submit" value="update">提交</input>
+    </form>
+</body>
+</html>

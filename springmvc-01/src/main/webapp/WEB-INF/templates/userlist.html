@@ -17,7 +17,10 @@
     <th>sex</th>
     <th>age</th>
     <th>email</th>
-    <th>操作</th>
+    <th>操作
+      <!--仅仅是跳转到添加页面-->
+      <a th:href="@{/restfulAdd}">添加</a>
+    </th>
   </tr>
   <tr th:each="user:${allUser}">
     <td th:text="${user.id}"></td>
@@ -27,11 +30,11 @@
     <td th:text="${user.age}"></td>
     <td th:text="${user.email}"></td>
     <td>
-      <a th:href="@{/restfulAdd}">添加</a>
-      <a href="">更新</a>
+      <!--不仅仅是跳转，还需要根据id查询user信息用于回显 所以只能写controller-->
+      <a th:href="@{'/user4/'+${user.id}}">更新</a>
       <!--超链接来控制表单的提交且是delete-->
-<!--      <a th:href="@{/user3/}+${user.id}">删除</a>-->
       <a @click="deleteUser" th:href="@{'/user3/'+${user.id}}">删除</a>
+      <!--      <a th:href="@{/user3/}+${user.id}">删除</a>-->
     </td>
   </tr>
 </table>

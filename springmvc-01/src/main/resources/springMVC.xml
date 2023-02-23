@@ -31,8 +31,11 @@
 
     <!--视图控制器view-control仅仅实现页面跳转  等同于http://localhost:8080/springmvc_01_war/-->
 <!--当设置任何一个view-control时，control中的请求映射全部失效  + 必须加 <mvc:annotation-driven/>   -->
+    <!-- 首页跳转 -->
     <mvc:view-controller path="/" view-name="index"></mvc:view-controller>
+    <!-- restful案例首页 -->
     <mvc:view-controller path="/restfulTest" view-name="restful"></mvc:view-controller>
+    <!-- 查看员工信息表格中的链接跳转到添加页面 -->
     <mvc:view-controller path="/restfulAdd" view-name="add"></mvc:view-controller>
 
 

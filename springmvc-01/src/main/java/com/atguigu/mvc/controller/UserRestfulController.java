@@ -4,6 +4,7 @@ import com.atguigu.mvc.dao.UserDao;
 import com.atguigu.mvc.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -75,6 +76,21 @@ public class UserRestfulController {
 
     @RequestMapping(value = "/adduser2" ,method = RequestMethod.POST)
     public String addUser2(User user){
+        userDao.save(user);
+        return "redirect:/user2";
+    }
+
+
+    @RequestMapping(value = "/user4/{id}" ,method = RequestMethod.GET)
+    public String getUserById(@PathVariable("id") Integer id, Model model){
+        User user = userDao.get(id);
+        //设置请求域中共享对象user
+        model.addAttribute("userKey",user);
+        return "update";
+    }
+
+    @RequestMapping(value = "/user5",method = RequestMethod.PUT)
+    public String updateUser(User user){
         userDao.save(user);
         return "redirect:/user2";
     }

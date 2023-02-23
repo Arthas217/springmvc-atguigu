@@ -16,7 +16,7 @@ import java.util.Map;
 @Component
 public class UserDao {
 
-    private static Map<Integer, User> employees = null;
+    private static Map<Integer, User> employees;
 
 
     static {
@@ -34,6 +34,7 @@ public class UserDao {
         if (user.getId() == null) {
             user.setId(initId++);
         }
+
         employees.put(user.getId(), user);
     }
 
