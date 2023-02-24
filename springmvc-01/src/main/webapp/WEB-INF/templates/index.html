@@ -58,5 +58,35 @@
   <a th:href="@{/testResponseBody}">测试@ResponseBody+响应浏览器数据 返回字符串success</a><br>
   <a th:href="@{/testResponseBody2}">测试@ResponseBody+响应浏览器数据 返回对象User</a><br>
 
+
+<!--通过超链接绑定处理ajax请求-->
+  <div id="app" >
+      <a @click="testAxios" th:href="@{/testAxios}">测试springmvc处理ajax</a>
+  </div>
+<!-- 引入js文件-->
+<script type="text/javascript" th:src="@{/static/js/vue.js}"></script>
+<script type="text/javascript" th:src="@{/static/js/axios.min.js}"></script>
+<script type="text/javascript">
+    new Vue({
+        el:"#app", //容器id
+        methods:{
+            testAxios:function (event){  //点击事件对应的函数
+                axios({
+                    method:"post",
+                    url:event.target.href,//当前超链接点击事件的链接url
+                    params:{  // 传输到服务器的数据
+                        username:"admin",
+                        password:"123456"
+                    }
+                }).then(function (response){//ajax处理执行成功后的执行的函数
+                    alert(response.data); // 响应的数据
+                });
+                event.preventDefault();//取消超链接的默认行为 （跳转）
+
+            }
+        }
+    });
+
+</script>
 </body>
 </html>
