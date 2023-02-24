@@ -44,13 +44,19 @@
   <a th:href="@{/testSession}">session向request域对象共享数据</a><br/>
   <a th:href="@{/testApplication}">application向request域对象共享数据</a><br/>
 
+
+
+
     <form th:action="@{/requestBody}"  method="post">
       post请求参数1<input type="text" name="username"/><br>
       post请求参数2<input type="text" name="password"/><br>
-      <input type="submit" value="提交">
+      <input type="submit" value="提交 测试请求头信息">
     </form>
 
-  <a th:href="@{/testRequestEntity}">测试请求头信息</a>
+  <a th:href="@{/testRequestEntity}">测试请求体信息</a><br>
+  <a th:href="@{/testResponse}">测试通过ServletApi的response响应浏览器数据</a><br>
+  <a th:href="@{/testResponseBody}">测试@ResponseBody+响应浏览器数据 返回字符串success</a><br>
+  <a th:href="@{/testResponseBody2}">测试@ResponseBody+响应浏览器数据 返回对象User</a><br>
 
 </body>
 </html>

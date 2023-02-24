@@ -29,9 +29,7 @@
         </property>
     </bean>
 
-    <!--视图控制器view-control仅仅实现页面跳转  等同于http://localhost:8080/springmvc_01_war/-->
-<!--当设置任何一个view-control时，control中的请求映射全部失效  + 必须加 <mvc:annotation-driven/>   -->
-    <!-- 首页跳转 -->
+    <!--视图控制器view-control仅仅实现页面跳转  首页跳转  等同于http://localhost:8080/springmvc_01_war/-->
     <mvc:view-controller path="/" view-name="index"></mvc:view-controller>
     <!-- restful案例首页 -->
     <mvc:view-controller path="/restfulTest" view-name="restful"></mvc:view-controller>
@@ -39,8 +37,9 @@
     <mvc:view-controller path="/restfulAdd" view-name="add"></mvc:view-controller>
 
 
-
-    <!-- 开启mvc注解驱动 请求通过DispatcherServlet处理 不加的话只能处理默认的servlet-->
+    <!-- 当设置任何一个view-control时，control中的请求映射全部失效  + 解决方式必须加 <mvc:annotation-driven/>   -->
+    <!-- 加<mvc:annotation-driven/>可以将响应到浏览器的java对象转换为json格式的字符串 -->
+    <!-- 开启mvc注解驱动 请求通过DispatcherServlet处理 不加的话只能处理默认的servlet -->
     <mvc:annotation-driven>
         <mvc:message-converters>
             <!-- 处理响应中文内容乱码 -->
@@ -56,10 +55,8 @@
         </mvc:message-converters>
     </mvc:annotation-driven>
 
-    <!-- 处理静态资源，例如html、js、css、jpg 若只设置该标签，则只能访问静态资源，其他请求则无法访问
-      此时必须设置<mvc:annotation-driven/>解决问题 -->
-
-    <!--开放对静态资源的访问  请求通过DefaultServletHttpRequestHandler处理 不加的话静态资源找不到-->
+    <!--不加的话静态资源找不到 ，若只设置该标签，则只能访问静态资源，其他请求则无法访问，此时必须设置<mvc:annotation-driven/>解决问题 -->
+    <!--处理静态资源，例如html、js、css、jpg，开放对静态资源的访问，通过DefaultServletHttpRequestHandler处理请求 -->
     <mvc:default-servlet-handler/>
 
 
