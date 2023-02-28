@@ -91,4 +91,9 @@ public class HttpController {
         return "hello,axios";
     }
 
+
+    //responseEntity 用于控制器方法的返回值类型，返回值就是响应到浏览器的响应报文
+    // 可以参见FileUpAndDownController
+
+
 }

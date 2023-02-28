@@ -36,7 +36,6 @@
     <!-- 查看员工信息表格中的链接跳转到添加页面 -->
     <mvc:view-controller path="/restfulAdd" view-name="add"></mvc:view-controller>
 
-
     <!-- 当设置任何一个view-control时，control中的请求映射全部失效  + 解决方式必须加 <mvc:annotation-driven/>   -->
     <!-- 加<mvc:annotation-driven/>可以将响应到浏览器的java对象转换为json格式的字符串 -->
     <!-- 开启mvc注解驱动 请求通过DispatcherServlet处理 不加的话只能处理默认的servlet -->
@@ -60,4 +59,9 @@
     <mvc:default-servlet-handler/>
 
 
+    <!-- 文件上传和下载 -->
+    <mvc:view-controller path="/file" view-name="file"></mvc:view-controller>
+
+    <!-- 配置 文件上传解析器，将上传的文件封装为MultipartFile对象-->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"></bean>
 </beans>
