@@ -64,4 +64,14 @@
 
     <!-- 配置 文件上传解析器，将上传的文件封装为MultipartFile对象-->
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"></bean>
+
+   <!-- 跳转拦截器页面-->
+    <mvc:view-controller path="/interceptor" view-name="interceptor"></mvc:view-controller>
+
+    <!-- 配置拦截器 在DispatcherServlet映射控制器的方法时(pre,post,AfterCompletion)调用的-->
+    <!-- 第一种方式 配置的拦截器会+ prehandle放行，对每个请求都会拦截-->
+    <mvc:interceptors>
+        <bean class="com.atguigu.mvc.interceptors.AllRequestInterceptor"></bean>
+    </mvc:interceptors>
+
 </beans>
