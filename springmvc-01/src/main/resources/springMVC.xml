@@ -7,7 +7,7 @@
 
 
     <!-- 自动扫描包 -->
-    <context:component-scan base-package="com.atguigu.mvc.controller,com.atguigu.mvc.dao"/>
+    <context:component-scan base-package="com.atguigu.mvc.controller,com.atguigu.mvc.dao,com.atguigu.mvc.interceptors"/>
 
     <!-- 配置Thymeleaf视图解析器 -->
     <bean id="viewResolver" class="org.thymeleaf.spring5.view.ThymeleafViewResolver">
@@ -65,13 +65,32 @@
     <!-- 配置 文件上传解析器，将上传的文件封装为MultipartFile对象-->
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"></bean>
 
-   <!-- 跳转拦截器页面-->
+   <!-- 跳转拦截器页面 -->
     <mvc:view-controller path="/interceptor" view-name="interceptor"></mvc:view-controller>
 
-    <!-- 配置拦截器 在DispatcherServlet映射控制器的方法时(pre,post,AfterCompletion)调用的-->
-    <!-- 第一种方式 配置的拦截器会+ prehandle放行，对每个请求都会拦截-->
+    <!-- 配置拦截器 在DispatcherServlet映射控制器的方法时(pre,post,AfterCompletion)调用的，prehandle放行true、拦截false-->
     <mvc:interceptors>
-        <bean class="com.atguigu.mvc.interceptors.AllRequestInterceptor"></bean>
+        <!-- 第一种方式 配置的拦截器会+bean的class，对每个请求都会拦截-->
+<!--        <bean class="com.atguigu.mvc.interceptors.AllRequestInterceptor"></bean>-->
+        <!-- 第二种方式  @Component+ref+自动扫描包，对每个请求都会拦截-->
+<!--        <ref bean="allRequestInterceptor"></ref>-->
+
+        <!-- 第三种方式  mvc的interceptor+设置当前拦截路径，对某些请求拦截-->
+        <mvc:interceptor>
+            <!-- 匹配一层路径 请求拦截
+            http://localhost:8080/springmvc_01_war/interceptor
+            http://localhost:8080/springmvc_01_war/testInterceptor
+            匹配更多层路径 请求拦截失败
+            http://localhost:8080/springmvc_01_war/a/testInterceptor
+            -->
+<!--            <mvc:mapping path="/*"/>-->
+
+            <!-- 匹配所有请求 -->
+            <mvc:mapping path="/**"/>
+            <!--排除主页面请求拦截，即不需要拦截的请求 http://localhost:8080/springmvc_01_war/-->
+            <mvc:exclude-mapping path="/"/>
+            <ref bean="allRequestInterceptor"></ref>
+        </mvc:interceptor>
     </mvc:interceptors>
 
 </beans>

@@ -11,7 +11,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class InterceptorController {
 
-    @RequestMapping(value = "/testInterceptor")
+    /**
+     * 请求路径中**表示一层或多层路径的请求
+     * http://localhost:8080/springmvc_01_war/testInterceptor
+     * http://localhost:8080/springmvc_01_war/a/testInterceptor
+     * @return
+     */
+    @RequestMapping(value = "/**/testInterceptor")
     public String testInterceptor(){
         return "target";
     }
