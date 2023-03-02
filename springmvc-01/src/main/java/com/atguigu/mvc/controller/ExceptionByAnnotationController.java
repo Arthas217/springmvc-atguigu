@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 /**
  * @Author 会游泳的蚂蚁
  * @Description: springmvc自动检测到异常就处理
- * 基于注解的异常处理器  @ControllerAdvice + @ExceptionHandler
+ * 基于注解的异常处理器 @ControllerAdvice + @ExceptionHandler
  * @Date 2023/3/2 18:35
  */
 @ControllerAdvice
