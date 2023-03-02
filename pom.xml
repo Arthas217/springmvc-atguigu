@@ -11,6 +11,7 @@
     <modules>
         <module>springmvc-01</module>
         <module>springmvc-jsp</module>
+        <module>springmvc-annotation</module>
     </modules>
 
     <properties>

@@ -36,9 +36,9 @@
     <!-- 查看员工信息表格中的链接跳转到添加页面 -->
     <mvc:view-controller path="/restfulAdd" view-name="add"></mvc:view-controller>
 
-    <!-- 当设置任何一个view-control时，control中的请求映射全部失效  + 解决方式必须加 <mvc:annotation-driven/>   -->
-    <!-- 加<mvc:annotation-driven/>可以将响应到浏览器的java对象转换为json格式的字符串 -->
-    <!-- 开启mvc注解驱动 请求通过DispatcherServlet处理 不加的话只能处理默认的servlet -->
+    <!-- 当设置任何一个view-control时，control中的请求映射全部失效， 解决方式必须开启mvc注解驱动  -->
+    <!-- 开启mvc注解驱动可以将响应到浏览器的java对象转换为json格式的字符串 -->
+    <!-- 开启mvc注解驱动 请求通过DispatcherServlet处理 不加的话只能默认的servlet处理 -->
     <mvc:annotation-driven>
         <mvc:message-converters>
             <!-- 处理响应中文内容乱码 -->
@@ -54,8 +54,8 @@
         </mvc:message-converters>
     </mvc:annotation-driven>
 
-    <!--不加的话静态资源找不到 ，若只设置该标签，则只能访问静态资源，其他请求则无法访问，此时必须设置<mvc:annotation-driven/>解决问题 -->
-    <!--处理静态资源，例如html、js、css、jpg，开放对静态资源的访问，通过DefaultServletHttpRequestHandler处理请求 -->
+    <!--不加的话静态资源找不到 ，若只设置该标签，则只能访问静态资源，其他请求则无法访问，此时必须设置mvc注解驱动解决问题 -->
+    <!--添加后，开放对静态资源的访问，通过DefaultServletHttpRequestHandler处理请求 处理静态资源，例如html、js、css、jpg，-->
     <mvc:default-servlet-handler/>
 
 
