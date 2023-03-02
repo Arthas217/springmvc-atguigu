@@ -110,4 +110,23 @@
         -->
     </mvc:interceptors>
 
+
+    <!-- 基于配置的异常处理器 -->
+    <!-- springmvc提供了自定义的异常处理器SimpleMappingExceptionResolver（如果控制器处理异常，经统一的异常处理器返回mv） -->
+    <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+        <property name="exceptionMappings">
+            <props>
+                <!-- key为该异常的全限定类名  value是数据视图-->
+                <!-- ExceptionController这个控制会报这个异常，跳转到error页面-->
+                <prop key="java.lang.ArithmeticException">error</prop>
+            </props>
+        </property>
+         <!-- 还可以添加，页面中输出具体的异常信息 以value为键，保存在请求域中-->
+         <!-- exceptionAttribute设置异常信息共享在请求域中的键value=ex-->
+        <property name="exceptionAttribute" value="ex"></property>
+    </bean>
+
+     <!--基于注解的异常处理器-->
+
+
 </beans>
