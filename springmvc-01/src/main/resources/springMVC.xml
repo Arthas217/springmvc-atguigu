@@ -111,6 +111,7 @@
     </mvc:interceptors>
 
 
+
     <!-- 基于配置的异常处理器 -->
     <!-- springmvc提供了自定义的异常处理器SimpleMappingExceptionResolver（如果控制器处理异常，经统一的异常处理器返回mv） -->
     <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
