@@ -103,6 +103,10 @@
            即preHandle按照配置顺序执行，postHandle和afterCompletion按照配置顺序反序执行。
            2、若某个拦截器的preHandle返回的都是false， 返回false的preHandle拦截器和之前的拦截器的preHandle都会执行，
            postHandle都不会执行，返回false的拦截器之前的拦截器的afterCompletion会执行。
+
+           eg拦截器：一、二、三、四、五  && 三：false拦截
+            一、二、三preHandle
+            二、一afterCompletion
         -->
     </mvc:interceptors>
 
