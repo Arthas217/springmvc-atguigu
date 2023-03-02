@@ -11,6 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class ExceptionController {
 
+    /**
+     * 基于配置的异常处理器方式
+     * @return
+     */
     @RequestMapping(value = "/testExceptionHandler")
     public String testExceptionHandler() {
         System.out.println(1 / 0);

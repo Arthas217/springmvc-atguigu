@@ -127,6 +127,5 @@
         <property name="exceptionAttribute" value="ex"></property>
     </bean>
 
-     <!--基于注解的异常处理器-->
 
 </beans>
