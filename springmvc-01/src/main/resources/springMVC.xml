@@ -76,21 +76,34 @@
 <!--        <ref bean="allRequestInterceptor"></ref>-->
 
         <!-- 第三种方式  mvc的interceptor+设置当前拦截路径，对某些请求拦截-->
-        <mvc:interceptor>
-            <!-- 匹配一层路径 请求拦截
-            http://localhost:8080/springmvc_01_war/interceptor
-            http://localhost:8080/springmvc_01_war/testInterceptor
-            匹配更多层路径 请求拦截失败
-            http://localhost:8080/springmvc_01_war/a/testInterceptor
-            -->
-<!--            <mvc:mapping path="/*"/>-->
+<!--        <mvc:interceptor>-->
+<!--            &lt;!&ndash; 匹配一层路径 请求拦截-->
+<!--            http://localhost:8080/springmvc_01_war/interceptor-->
+<!--            http://localhost:8080/springmvc_01_war/testInterceptor-->
+<!--            匹配更多层路径 请求拦截失败-->
+<!--            http://localhost:8080/springmvc_01_war/a/testInterceptor-->
+<!--            &ndash;&gt;-->
+<!--&lt;!&ndash;            <mvc:mapping path="/*"/>&ndash;&gt;-->
 
-            <!-- 匹配所有请求 -->
-            <mvc:mapping path="/**"/>
-            <!--排除主页面请求拦截，即不需要拦截的请求 http://localhost:8080/springmvc_01_war/-->
-            <mvc:exclude-mapping path="/"/>
-            <ref bean="allRequestInterceptor"></ref>
-        </mvc:interceptor>
+<!--            &lt;!&ndash; 匹配所有请求 &ndash;&gt;-->
+<!--            <mvc:mapping path="/**"/>-->
+<!--            &lt;!&ndash;排除主页面请求拦截，即不需要拦截的请求 http://localhost:8080/springmvc_01_war/&ndash;&gt;-->
+<!--            <mvc:exclude-mapping path="/"/>-->
+<!--            <ref bean="allRequestInterceptor"></ref>-->
+<!--        </mvc:interceptor>-->
+
+
+        <!-- 拦截器执行顺序 在输出信息中preHandle与ref定义的bean顺序一致，postHandle和afterCompletion与ref定义的bean顺序相反-->
+        <!-- 源码DispatcherServlet中preHandle从0开始遍历的,postHandle和afterCompletion是从最后开始遍历的 -->
+        <!-- 如果多个拦截器中，某个拦截器preHandle返回的拦截状态为false，那么interceptorIndex值是遍历此拦截状态的拦截器的上一个拦截器中索引的值-->
+        <ref bean="allRequestInterceptor"></ref>
+        <ref bean="multiRequestInterceptor"></ref>
+        <!-- 总结：多个拦截器执行顺序
+           1、若每个拦截器的preHandle返回的都是true，此时多个拦截器的执行顺序和拦截器在springmvc配置文件中的配置顺序有关。
+           即preHandle按照配置顺序执行，postHandle和afterCompletion按照配置顺序反序执行。
+           2、若某个拦截器的preHandle返回的都是false， 返回false的preHandle拦截器和之前的拦截器的preHandle都会执行，
+           postHandle都不会执行，返回false的拦截器之前的拦截器的afterCompletion会执行。
+        -->
     </mvc:interceptors>
 
 </beans>
