@@ -1,18 +1,25 @@
 package com.bj.hh.config;
 
+import com.bj.hh.interceptor.TestInterceptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.context.ContextLoader;
 import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.multipart.MultipartResolver;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
+import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.ViewResolver;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.*;
+import org.springframework.web.servlet.handler.SimpleMappingExceptionResolver;
 import org.thymeleaf.spring5.SpringTemplateEngine;
-import org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.spring5.view.ThymeleafViewResolver;
 import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateresolver.ITemplateResolver;
 import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
+
+import java.util.List;
+import java.util.Properties;
 
 /**
  * @Author 会游泳的蚂蚁
@@ -28,14 +35,15 @@ import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
  * @Date 2023/3/2 23:34
  */
 @Configuration
-//1
-@ComponentScan({"com.bj.hh.controller"})
-//5
-@EnableWebMvc
-public class WebConfig {
+@ComponentScan({"com.bj.hh.controller"})//扫描组件
+@EnableWebMvc //mvc注解驱动
+public class WebConfig implements WebMvcConfigurer {
+
+
     /**
-     * //2
+     * Thymeleaf视图解析器
      * 配置生成模板解析器
+     *
      * @return
      */
     @Bean
@@ -52,11 +60,12 @@ public class WebConfig {
 
     /**
      * 生成模板引擎，且注入模板解析器
+     *
      * @param iTemplateResolver
      * @return
      */
     @Bean
-    public SpringTemplateEngine templateEngine(ITemplateResolver iTemplateResolver){
+    public SpringTemplateEngine templateEngine(ITemplateResolver iTemplateResolver) {
         SpringTemplateEngine springTemplateEngine = new SpringTemplateEngine();
         springTemplateEngine.setTemplateResolver(iTemplateResolver);
         return springTemplateEngine;
@@ -65,14 +74,76 @@ public class WebConfig {
 
     /**
      * 生成视图解析器，且注入模板引擎
+     *
      * @param templateEngine
      * @return
      */
     @Bean
-    public ViewResolver viewResolver(SpringTemplateEngine templateEngine){
+    public ViewResolver viewResolver(SpringTemplateEngine templateEngine) {
         ThymeleafViewResolver thymeleafViewResolver = new ThymeleafViewResolver();
         thymeleafViewResolver.setCharacterEncoding("UTF-8");
         thymeleafViewResolver.setTemplateEngine(templateEngine);
         return thymeleafViewResolver;
+    }
+
+    /**
+     * view-controller
+     *
+     * @param registry
+     */
+    @Override
+    public void addViewControllers(ViewControllerRegistry registry) {
+        registry.addViewController("/hello").setViewName("hello");
+    }
+
+
+    /**
+     * default-servlet-handler--------需要实现WebMvcConfigurer接口
+     *
+     * @param configurer
+     */
+    @Override
+    public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
+        // 代表默认的servlet可用
+        configurer.enable();
+    }
+
+
+    /**
+     * 配置拦截器
+     * HandlerInterceptor
+     *
+     * @param registry
+     */
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        TestInterceptor testInterceptor = new TestInterceptor();
+        registry.addInterceptor(testInterceptor).addPathPatterns("/**").excludePathPatterns("/");
+    }
+
+
+    /**
+     * 上传和下载文件
+     * @return
+     */
+    @Bean
+    public MultipartResolver multipartResolver() {
+        CommonsMultipartResolver commonsMultipartResolver = new CommonsMultipartResolver();
+        return commonsMultipartResolver;
+    }
+
+
+    /**
+     * 异常处理
+     * @param resolvers
+     */
+    @Override
+    public void configureHandlerExceptionResolvers(List<HandlerExceptionResolver> resolvers) {
+        SimpleMappingExceptionResolver simpleMappingExceptionResolver = new SimpleMappingExceptionResolver();
+        Properties properties = new Properties();
+        properties.setProperty("java.lang.ArithmeticException","error");
+        simpleMappingExceptionResolver.setExceptionMappings(properties);
+        simpleMappingExceptionResolver.setExceptionAttribute("exception");
+        resolvers.add(simpleMappingExceptionResolver);
     }
 }

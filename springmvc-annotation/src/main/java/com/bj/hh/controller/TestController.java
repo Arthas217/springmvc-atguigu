@@ -15,4 +15,11 @@ public class TestController {
     public String index(){
         return "index";
     }
+
+
+    @RequestMapping(value = "/exception")
+    public String exception(){
+        System.out.println(1/0);
+        return "hello";
+    }
 }
